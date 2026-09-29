@@ -2,7 +2,24 @@
   "project": "Stillwater",
   "tagline": "A fogbound survival-horror town where everyone stopped existing.",
   "updated": "2026-09-29",
+  "build": "0.1.0",
+  "versions": [
+    {
+      "id": "0.1.0",
+      "date": "2026-09-29",
+      "title": "Foundation slice",
+      "summary": "Project renamed Stillwater, demo map as startup, private Git backup, and a public auto-updating development journal."
+    }
+  ],
   "entries": [
+    {
+      "id": "2026-09-29-site-tune",
+      "date": "2026-09-29",
+      "title": "Project settings pass + journal redesign",
+      "summary": "Tuned packaging/cook maps, streaming, and TAA defaults for lighter iteration. Redesigned the public journal into a fuller fogbound site with nav, filters, and version history.",
+      "tags": ["infra", "docs", "perf"],
+      "screenshots": []
+    },
     {
       "id": "2026-09-29-bootstrap",
       "date": "2026-09-29",

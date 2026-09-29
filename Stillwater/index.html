@@ -4,40 +4,85 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stillwater — Development Journal</title>
-  <meta name="description" content="Progress, screenshots, and version history for Stillwater." />
+  <meta name="description" content="Progress, screenshots, and version history for Stillwater — a fogbound survival-horror town." />
+  <meta name="theme-color" content="#0a0f10" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="fog" aria-hidden="true"></div>
-  <header class="hero">
-    <p class="eyebrow">Development journal</p>
+  <div class="atmosphere" aria-hidden="true">
+    <div class="fog fog-a"></div>
+    <div class="fog fog-b"></div>
+    <div class="fog fog-c"></div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+    <div class="horizon"></div>
+  </div>
+
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand-mark" href="#top">Stillwater</a>
+    <div class="nav-links">
+      <a href="#journal">Journal</a>
+      <a href="#versions">Versions</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <p class="eyebrow">Fogbound survival horror · UE 5.8</p>
     <h1 id="project-name">Stillwater</h1>
     <p id="tagline" class="tagline"></p>
-    <p class="meta">Last updated <span id="updated"></span> · <span id="entry-count"></span> entries</p>
+    <div class="hero-cta">
+      <a class="btn" href="#journal">Read the journal</a>
+      <p class="meta">Updated <span id="updated"></span> · <span id="entry-count"></span> entries · build <span id="build-version">—</span></p>
+    </div>
   </header>
 
   <main>
-    <section class="panel">
-      <h2>Timeline</h2>
+    <section class="section" id="journal">
+      <div class="section-head">
+        <h2>Development journal</h2>
+        <p class="section-lede">What changed, what broke, and what we’re chasing next in the town.</p>
+      </div>
+      <div class="filters" id="filters" hidden></div>
       <ol id="timeline" class="timeline"></ol>
     </section>
 
-    <section class="panel">
-      <h2>How this updates</h2>
-      <p class="note">
-        Every push to <code>main</code> rebuilds this site. Add an entry in
-        <code>docs/progress-site/data/progress.json</code>, drop screenshots into
-        <code>docs/progress-site/screenshots/</code>, commit, and push — GitHub Pages refreshes automatically.
-      </p>
+    <section class="section" id="versions">
+      <div class="section-head">
+        <h2>Version history</h2>
+        <p class="section-lede">Milestones that stick — denser than day-to-day notes.</p>
+      </div>
+      <ol id="version-list" class="version-list"></ol>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="section-head">
+        <h2>About this record</h2>
+        <p class="section-lede">
+          This site rebuilds automatically when the private Stillwater repo updates
+          <code>docs/progress-site/</code>. Screenshots drop into
+          <code>screenshots/</code>; entries live in <code>data/progress.json</code>.
+        </p>
+      </div>
+      <ul class="pillars">
+        <li><strong>Isolation</strong> — a town emptied of people, not of presence.</li>
+        <li><strong>Fog as system</strong> — weather and visibility as gameplay, not garnish.</li>
+        <li><strong>Grounded horror</strong> — systems first, spectacle second.</li>
+      </ul>
     </section>
   </main>
 
-  <footer>
-    <p>Stillwater · private development record</p>
+  <footer class="site-footer">
+    <div>
+      <p class="footer-brand">Stillwater</p>
+      <p>Private development journal · public read-only mirror</p>
+    </div>
+    <p class="footer-meta">datguydaz · Unreal Engine 5.8</p>
   </footer>
+
   <script src="./app.js"></script>
 </body>
 </html>
