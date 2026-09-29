@@ -305,20 +305,6 @@ function wireLightbox() {
   });
 }
 
-function renderLoreBlock(hostId, block, listKey) {
-  const host = document.getElementById(hostId);
-  if (!host || !block) return;
-  host.innerHTML = "";
-  host.appendChild(el("h3", null, block.title || ""));
-  host.appendChild(el("p", "lore-lede", block.lede || ""));
-  const items = block[listKey] || [];
-  if (items.length) {
-    const ul = el("ul", "lore-list");
-    for (const item of items) ul.appendChild(el("li", null, item));
-    host.appendChild(ul);
-  }
-}
-
 function renderBible(bible, entries) {
   if (!bible) return;
 
@@ -334,9 +320,37 @@ function renderBible(bible, entries) {
   const prompt = document.getElementById("working-prompt");
   if (prompt) prompt.textContent = bible.workingPrompt || "";
 
-  renderLoreBlock("lore-fog", bible.fog, "systems");
-  renderLoreBlock("lore-audio", bible.audio, "cues");
-  renderLoreBlock("lore-survival", bible.survival, "tenets");
+  const chaptersHost = document.getElementById("lore-chapters");
+  if (chaptersHost) {
+    chaptersHost.innerHTML = "";
+    for (const chapter of bible.chapters || []) {
+      const article = el("article", "lore-chapter");
+      article.id = `lore-${chapter.id || ""}`;
+      article.appendChild(el("h3", null, chapter.title || ""));
+      if (chapter.lede) article.appendChild(el("p", "lore-lede", chapter.lede));
+      if (chapter.quote) {
+        const q = el("blockquote", "lore-quote", chapter.quote);
+        article.appendChild(q);
+      }
+      if (chapter.points?.length) {
+        const ul = el("ul", "lore-list");
+        for (const item of chapter.points) ul.appendChild(el("li", null, item));
+        article.appendChild(ul);
+      }
+      chaptersHost.appendChild(article);
+    }
+  }
+
+  const rules = bible.narrativeRules || {};
+  const rulesTitle = document.getElementById("rules-title");
+  const rulesLede = document.getElementById("rules-lede");
+  const rulesList = document.getElementById("rules-list");
+  if (rulesTitle && rules.title) rulesTitle.textContent = rules.title;
+  if (rulesLede) rulesLede.textContent = rules.lede || "";
+  if (rulesList) {
+    rulesList.innerHTML = "";
+    for (const item of rules.points || []) rulesList.appendChild(el("li", null, item));
+  }
 
   const touched = new Map();
   for (const entry of entries || []) {
