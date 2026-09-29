@@ -4,9 +4,9 @@
     "updated":  "2026-09-29",
     "build":  "0.1.1",
     "now":  {
-                "focus":  "Shaping the Stillwater vertical slice (datguydaz_demo map)",
+                "focus":  "Blocking atmosphere and capturing the vertical slice",
                 "map":  "datguydaz_demo",
-                "next":  "Treat Template/Demo/pack names as source assets — brand stays Stillwater"
+                "next":  "Tighten enemy presentation and keep collecting editor shots"
             },
     "versions":  [
                      {
@@ -23,20 +23,6 @@
                      }
                  ],
     "entries":  [
-                    {
-                        "id":  "2026-09-29-naming-clarity",
-                        "date":  "2026-09-29",
-                        "title":  "Brand vs Template/Demo asset names",
-                        "summary":  "Locked the rule: Stillwater is the game name. Template, Demo, Example, and marketplace pack asset names (RH, YI, datguydaz_demo, Zumbi, etc.) are source scaffolding — keep paths, don\u0027t use them as the product brand.",
-                        "tags":  [
-                                     "docs",
-                                     "setup",
-                                     "vision"
-                                 ],
-                        "screenshots":  [
-                                            "editor_20260929_092411.png"
-                                        ]
-                    },
                     {
                         "id":  "2026-09-29-editor-gallery",
                         "date":  "2026-09-29",
