@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stillwater — Development Journal</title>
-  <meta name="description" content="Stillwater — fogbound survival horror. Lore, design compass, and development journal." />
+  <meta name="description" content="Stillwater — fogbound survival horror. Development journal, captures, and lore reference." />
   <meta name="theme-color" content="#0a0f10" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=0.1.3" />
+  <link rel="stylesheet" href="./styles.css?v=0.1.4" />
 </head>
 <body>
   <div class="atmosphere" aria-hidden="true">
@@ -25,12 +25,11 @@
   <nav class="topnav" aria-label="Primary">
     <a class="brand-mark" href="#top">Stillwater</a>
     <div class="nav-links">
-      <a href="#lore">Lore</a>
-      <a href="#rules">Rules</a>
-      <a href="#compass">Compass</a>
       <a href="#now">Now</a>
       <a href="#gallery">Gallery</a>
       <a href="#journal">Journal</a>
+      <a href="#lore">Lore</a>
+      <a href="#compass">Compass</a>
     </div>
   </nav>
 
@@ -45,42 +44,13 @@
     <p id="tagline" class="tagline"></p>
     <blockquote class="epigraph" id="epigraph"></blockquote>
     <div class="hero-cta">
-      <a class="btn" href="#lore">Enter the town</a>
-      <a class="btn btn-ghost" href="#journal">Development journal</a>
+      <a class="btn" href="#journal">Development journal</a>
+      <a class="btn btn-ghost" href="#gallery">From the editor</a>
       <p class="meta">Updated <span id="updated"></span> · <span id="entry-count"></span> entries · <span id="shot-count">0</span> shots · build <span id="build-version">—</span></p>
     </div>
   </header>
 
   <main>
-    <section class="section lore-section" id="lore">
-      <div class="section-head">
-        <h2>Foundational lore</h2>
-        <p class="section-lede" id="lore-logline"></p>
-      </div>
-      <p class="lore-inspiration" id="lore-inspiration"></p>
-      <div class="lore-chapters" id="lore-chapters"></div>
-      <div class="working-prompt">
-        <p class="now-label">Working prompt</p>
-        <p id="working-prompt"></p>
-      </div>
-    </section>
-
-    <section class="section" id="rules">
-      <div class="section-head">
-        <h2 id="rules-title">Narrative rules</h2>
-        <p class="section-lede" id="rules-lede"></p>
-      </div>
-      <ul class="lore-list rules-list" id="rules-list"></ul>
-    </section>
-
-    <section class="section" id="compass">
-      <div class="section-head">
-        <h2>Design compass</h2>
-        <p class="section-lede">When a feature is uncertain, climb this ladder. Journal work lights the rungs we have touched.</p>
-      </div>
-      <ol class="priority-ladder" id="priority-ladder"></ol>
-    </section>
-
     <section class="section now-section" id="now">
       <div class="section-head">
         <h2>In the fog right now</h2>
@@ -127,7 +97,7 @@
     <section class="section" id="journal">
       <div class="section-head">
         <h2>Development journal</h2>
-        <p class="section-lede">What changed in the town — measured against the compass above.</p>
+        <p class="section-lede">What changed in the town — measured against the compass.</p>
       </div>
       <div class="filters" id="filters" hidden></div>
       <ol id="timeline" class="timeline"></ol>
@@ -136,9 +106,33 @@
     <section class="section" id="versions">
       <div class="section-head">
         <h2>Version history</h2>
-        <p class="section-lede">Milestones that stick — denser than day-to-day notes.</p>
+        <p class="section-lede">Milestones that stick.</p>
       </div>
       <ol id="version-list" class="version-list"></ol>
+    </section>
+
+    <section class="section lore-section" id="lore">
+      <div class="section-head row">
+        <div>
+          <h2>Lore reference</h2>
+          <p class="section-lede" id="lore-logline"></p>
+        </div>
+      </div>
+      <p class="lore-inspiration" id="lore-inspiration"></p>
+      <div class="lore-accordion" id="lore-chapters"></div>
+
+      <div class="lore-side-grid">
+        <div>
+          <h3 class="subhead" id="rules-title">Narrative rules</h3>
+          <p class="section-lede tight" id="rules-lede"></p>
+          <ul class="lore-list rules-list" id="rules-list"></ul>
+        </div>
+        <div id="compass">
+          <h3 class="subhead">Design compass</h3>
+          <p class="section-lede tight">When unsure, climb this ladder. Journal work lights the rungs.</p>
+          <ol class="priority-ladder compact" id="priority-ladder"></ol>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -160,6 +154,6 @@
     <button type="button" class="lb-nav next" id="lb-next" aria-label="Next">›</button>
   </div>
 
-  <script src="./app.js?v=0.1.3"></script>
+  <script src="./app.js?v=0.1.4"></script>
 </body>
 </html>

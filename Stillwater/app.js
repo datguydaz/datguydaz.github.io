@@ -317,28 +317,29 @@ function renderBible(bible, entries) {
   const inspiration = document.getElementById("lore-inspiration");
   if (inspiration) inspiration.textContent = bible.inspiration || "";
 
-  const prompt = document.getElementById("working-prompt");
-  if (prompt) prompt.textContent = bible.workingPrompt || "";
-
   const chaptersHost = document.getElementById("lore-chapters");
   if (chaptersHost) {
     chaptersHost.innerHTML = "";
-    for (const chapter of bible.chapters || []) {
-      const article = el("article", "lore-chapter");
-      article.id = `lore-${chapter.id || ""}`;
-      article.appendChild(el("h3", null, chapter.title || ""));
-      if (chapter.lede) article.appendChild(el("p", "lore-lede", chapter.lede));
-      if (chapter.quote) {
-        const q = el("blockquote", "lore-quote", chapter.quote);
-        article.appendChild(q);
-      }
+    (bible.chapters || []).forEach((chapter, index) => {
+      const details = document.createElement("details");
+      details.className = "lore-fold";
+      if (index === 0) details.open = true;
+
+      const summary = document.createElement("summary");
+      summary.textContent = chapter.title || "Chapter";
+      details.appendChild(summary);
+
+      const body = el("div", "lore-fold-body");
+      if (chapter.lede) body.appendChild(el("p", "lore-lede", chapter.lede));
+      if (chapter.quote) body.appendChild(el("blockquote", "lore-quote", chapter.quote));
       if (chapter.points?.length) {
         const ul = el("ul", "lore-list");
         for (const item of chapter.points) ul.appendChild(el("li", null, item));
-        article.appendChild(ul);
+        body.appendChild(ul);
       }
-      chaptersHost.appendChild(article);
-    }
+      details.appendChild(body);
+      chaptersHost.appendChild(details);
+    });
   }
 
   const rules = bible.narrativeRules || {};
