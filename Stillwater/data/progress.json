@@ -1,96 +1,67 @@
 ﻿{
-    "project":  "Stillwater",
-    "tagline":  "A fogbound survival-horror town where everyone stopped existing.",
-    "updated":  "2026-09-29",
-    "build":  "0.1.1",
-    "now":  {
-                "focus":  "Blocking atmosphere and capturing the vertical slice",
-                "map":  "datguydaz_demo",
-                "next":  "Tighten enemy presentation and keep collecting editor shots"
-            },
-    "versions":  [
-                     {
-                         "id":  "0.1.1",
-                         "date":  "2026-09-29",
-                         "title":  "Editor gallery pipeline",
-                         "summary":  "Public journal gained a live Now board, editor capture gallery with lightbox, and an Unreal Python shot script that feeds screenshots automatically."
-                     },
-                     {
-                         "id":  "0.1.0",
-                         "date":  "2026-09-29",
-                         "title":  "Foundation slice",
-                         "summary":  "Project renamed Stillwater, demo map as startup, private Git backup, and a public auto-updating development journal."
-                     }
-                 ],
-    "entries":  [
-                    {
-                        "id":  "2026-09-29-editor-gallery",
-                        "date":  "2026-09-29",
-                        "title":  "Editor captures feed the public gallery",
-                        "summary":  "Added From the editor gallery, Now board, lightbox, and Capture_Stillwater_Shot.py so viewport screenshots land in docs/progress-site and publish on push.",
-                        "tags":  [
-                                     "docs",
-                                     "infra",
-                                     "tools"
-                                 ],
-                        "screenshots":  [
-
-                                        ]
-                    },
-                    {
-                        "id":  "2026-09-29-site-tune",
-                        "date":  "2026-09-29",
-                        "title":  "Project settings pass + journal redesign",
-                        "summary":  "Tuned packaging/cook maps, streaming, and TAA defaults for lighter iteration. Redesigned the public journal into a fuller fogbound site with nav, filters, and version history.",
-                        "tags":  [
-                                     "infra",
-                                     "docs",
-                                     "perf"
-                                 ],
-                        "screenshots":  [
-
-                                        ]
-                    },
-                    {
-                        "id":  "2026-09-29-bootstrap",
-                        "date":  "2026-09-29",
-                        "title":  "Project named Stillwater, demo map locked in",
-                        "summary":  "Renamed from Stillvale, set datguydaz_demo as the startup scene, and established the survival-horror design pillars.",
-                        "tags":  [
-                                     "setup",
-                                     "maps",
-                                     "vision"
-                                 ],
-                        "screenshots":  [
-
-                                        ]
-                    },
-                    {
-                        "id":  "2026-09-29-m05-look",
-                        "date":  "2026-09-29",
-                        "title":  "Explored M05 zombie look on RH enemies",
-                        "summary":  "Started bridging YI Modular Zombies visuals with Resident Horror AI. Skeleton/anim mismatch left arms wrong â€” parked for a cleaner pass later.",
-                        "tags":  [
-                                     "enemies",
-                                     "animation",
-                                     "wip"
-                                 ],
-                        "screenshots":  [
-
-                                        ]
-                    },
-                    {
-                        "id":  "2026-09-29-backup-devlog",
-                        "date":  "2026-09-29",
-                        "title":  "Git backup + automatic progress site",
-                        "summary":  "Initialized version control for Stillwater-owned files (config, scripts, demo map metadata) and added this progressive development journal with GitHub Pages auto-deploy.",
-                        "tags":  [
-                                     "infra",
-                                     "docs"
-                                 ],
-                        "screenshots":  [
-
-                                        ]
-                    }
-                ]
+  "project": "Stillwater",
+  "tagline": "A fogbound survival-horror town where everyone stopped existing.",
+  "updated": "2026-09-29",
+  "build": "0.1.1",
+  "now": {
+    "focus": "Blocking atmosphere in the town",
+    "map": "Stillwater",
+    "next": "Tighten enemy presentation and keep collecting editor shots"
+  },
+  "versions": [
+    {
+      "id": "0.1.1",
+      "date": "2026-09-29",
+      "title": "Editor gallery pipeline",
+      "summary": "Public journal gained a live Now board, editor capture gallery with lightbox, and an Unreal Python shot script that feeds screenshots automatically."
+    },
+    {
+      "id": "0.1.0",
+      "date": "2026-09-29",
+      "title": "Foundation",
+      "summary": "Project locked as Stillwater, town map set as startup, private Git backup, and a public auto-updating development journal."
+    }
+  ],
+  "entries": [
+    {
+      "id": "2026-09-29-editor-gallery",
+      "date": "2026-09-29",
+      "title": "Editor captures feed the public gallery",
+      "summary": "Added From the editor gallery, Now board, lightbox, and Capture_Stillwater_Shot.py so viewport screenshots land in docs/progress-site and publish on push.",
+      "tags": ["docs", "infra", "tools"],
+      "screenshots": []
+    },
+    {
+      "id": "2026-09-29-site-tune",
+      "date": "2026-09-29",
+      "title": "Project settings pass + journal redesign",
+      "summary": "Tuned packaging, streaming, and TAA defaults for lighter iteration. Redesigned the public journal into a fuller fogbound site with nav, filters, and version history.",
+      "tags": ["infra", "docs", "perf"],
+      "screenshots": []
+    },
+    {
+      "id": "2026-09-29-bootstrap",
+      "date": "2026-09-29",
+      "title": "Stillwater named, town map locked in",
+      "summary": "Renamed from Stillvale, set the town level as the startup scene, and established the survival-horror design pillars.",
+      "tags": ["setup", "maps", "vision"],
+      "screenshots": []
+    },
+    {
+      "id": "2026-09-29-m05-look",
+      "date": "2026-09-29",
+      "title": "Explored dismembered zombie look on enemies",
+      "summary": "Started matching modular zombie visuals to the horror AI characters. Skeleton/anim mismatch left arms wrong — parked for a cleaner pass later.",
+      "tags": ["enemies", "animation", "wip"],
+      "screenshots": []
+    },
+    {
+      "id": "2026-09-29-backup-devlog",
+      "date": "2026-09-29",
+      "title": "Git backup + automatic progress site",
+      "summary": "Initialized version control for Stillwater-owned files (config, scripts, town map) and added this progressive development journal with GitHub Pages auto-deploy.",
+      "tags": ["infra", "docs"],
+      "screenshots": []
+    }
+  ]
 }

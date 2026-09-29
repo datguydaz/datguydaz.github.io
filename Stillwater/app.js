@@ -197,8 +197,8 @@ function renderVersions(versions, fallbackBuild) {
 
 function renderNow(progress, gallery) {
   const now = progress.now || {};
-  document.getElementById("now-focus").textContent = now.focus || "Exploring the demo slice";
-  document.getElementById("now-map").textContent = now.map || "datguydaz_demo";
+  document.getElementById("now-focus").textContent = now.focus || "Exploring the town";
+  document.getElementById("now-map").textContent = now.map || "Stillwater";
   document.getElementById("now-next").textContent = now.next || "Keep shaping atmosphere and encounters";
 
   const shots = Array.isArray(gallery?.shots) ? gallery.shots : [];
