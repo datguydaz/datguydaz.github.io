@@ -297,8 +297,28 @@ function wireLightbox() {
   });
 }
 
+function splitTitle(node) {
+  if (!node || node.dataset.split === "1") return;
+  const text = node.textContent || "";
+  node.textContent = "";
+  [...text].forEach((ch, i) => {
+    const span = document.createElement("span");
+    span.className = "char";
+    span.style.setProperty("--i", String(i));
+    span.textContent = ch === " " ? "\u00a0" : ch;
+    node.appendChild(span);
+  });
+  node.dataset.split = "1";
+}
+
 function render(progress, gallery) {
-  document.getElementById("project-name").textContent = progress.project || "Stillwater";
+  const name = progress.project || "Stillwater";
+  const title = document.getElementById("project-name");
+  title.textContent = name;
+  splitTitle(title);
+  const ghost = document.querySelector(".title-ghost");
+  if (ghost) ghost.textContent = name;
+
   document.getElementById("tagline").textContent = progress.tagline || "";
   document.getElementById("updated").textContent = progress.updated || "—";
   const entries = Array.isArray(progress.entries) ? progress.entries : [];
@@ -306,7 +326,7 @@ function render(progress, gallery) {
 
   const build = progress.build || progress.versions?.[0]?.id || "0.1";
   document.getElementById("build-version").textContent = build;
-  document.title = `${progress.project || "Stillwater"} — Development Journal`;
+  document.title = `${name} — Development Journal`;
 
   renderNow(progress, gallery);
   renderGallery(gallery || { shots: [] });
