@@ -161,65 +161,6 @@ html.cursor-hot .cursor-ring {
   to { opacity: 1; }
 }
 
-.town-lights {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-.town-light {
-  position: absolute;
-  width: var(--s);
-  height: var(--s);
-  border-radius: 50%;
-  background: #e8f2e4;
-  box-shadow:
-    0 0 4px rgba(230, 245, 220, 0.95),
-    0 0 12px rgba(180, 220, 170, 0.55),
-    0 0 28px rgba(140, 190, 150, 0.25);
-  opacity: var(--o);
-  animation: light-flicker var(--d) steps(2, end) infinite;
-}
-.town-light.is-warm {
-  background: #e0c49a;
-  box-shadow:
-    0 0 5px rgba(255, 200, 130, 0.95),
-    0 0 14px rgba(220, 150, 70, 0.45),
-    0 0 30px rgba(180, 100, 40, 0.2);
-}
-.town-light.is-far {
-  filter: blur(0.4px);
-  opacity: calc(var(--o) * 0.7);
-}
-@keyframes light-flicker {
-  0% { opacity: var(--o); transform: scale(1); }
-  8% { opacity: calc(var(--o) * 0.15); }
-  12% { opacity: calc(var(--o) * 1.2); transform: scale(1.35); }
-  18% { opacity: calc(var(--o) * 0.4); }
-  27% { opacity: var(--o); }
-  41% { opacity: calc(var(--o) * 0.2); transform: scale(0.85); }
-  44% { opacity: calc(var(--o) * 1.15); transform: scale(1.4); }
-  52% { opacity: calc(var(--o) * 0.55); }
-  61% { opacity: var(--o); }
-  73% { opacity: calc(var(--o) * 0.1); }
-  76% { opacity: calc(var(--o) * 0.95); }
-  88% { opacity: calc(var(--o) * 0.35); }
-  100% { opacity: var(--o); }
-}
-
-.beams {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(115deg, transparent 40%, rgba(160, 185, 165, 0.04) 48%, transparent 56%),
-    linear-gradient(75deg, transparent 55%, rgba(180, 160, 120, 0.03) 62%, transparent 70%);
-  mix-blend-mode: soft-light;
-  animation: beam-drift 22s ease-in-out infinite alternate;
-}
-@keyframes beam-drift {
-  from { transform: translateX(-2%) rotate(-1deg); opacity: 0.5; }
-  to { transform: translateX(3%) rotate(1deg); opacity: 1; }
-}
-
 .lake {
   position: absolute;
   left: 0;

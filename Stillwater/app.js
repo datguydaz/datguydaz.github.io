@@ -424,29 +424,6 @@ function render(progress, gallery) {
   renderVersions(progress.versions || [], build);
 }
 
-function spawnTownLights() {
-  const host = document.getElementById("town-lights");
-  if (!host || host.dataset.ready === "1") return;
-  const count = 64;
-  for (let i = 0; i < count; i++) {
-    const light = document.createElement("span");
-    const far = Math.random() > 0.55;
-    light.className = "town-light" + (Math.random() > 0.55 ? " is-warm" : "") + (far ? " is-far" : "");
-    const band = Math.random();
-    const bottom = band < 0.7
-      ? 8 + Math.random() * 22
-      : 28 + Math.random() * 20;
-    light.style.left = `${2 + Math.random() * 96}%`;
-    light.style.bottom = `${bottom}%`;
-    light.style.setProperty("--s", `${far ? 1 + Math.random() * 1.6 : 1.6 + Math.random() * 3.2}px`);
-    light.style.setProperty("--d", `${0.9 + Math.random() * 3.8}s`);
-    light.style.setProperty("--o", `${far ? 0.2 + Math.random() * 0.35 : 0.4 + Math.random() * 0.55}`);
-    light.style.animationDelay = `${-Math.random() * 4}s`;
-    host.appendChild(light);
-  }
-  host.dataset.ready = "1";
-}
-
 function initCursor() {
   const ring = document.getElementById("cursor-ring");
   const core = document.getElementById("cursor-core");
@@ -565,7 +542,6 @@ function initGlitch() {
 }
 
 wireLightbox();
-spawnTownLights();
 initCursor();
 initFilmGrain();
 initGlitch();
