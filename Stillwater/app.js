@@ -432,7 +432,6 @@ function spawnTownLights() {
     const light = document.createElement("span");
     const far = Math.random() > 0.55;
     light.className = "town-light" + (Math.random() > 0.55 ? " is-warm" : "") + (far ? " is-far" : "");
-    // Cluster more lights along a shoreline band
     const band = Math.random();
     const bottom = band < 0.7
       ? 8 + Math.random() * 22
@@ -448,8 +447,72 @@ function spawnTownLights() {
   host.dataset.ready = "1";
 }
 
+function spawnBirds() {
+  const host = document.getElementById("birds");
+  if (!host || host.dataset.ready === "1") return;
+  const flockCount = 5;
+  for (let f = 0; f < flockCount; f++) {
+    const flock = document.createElement("div");
+    flock.className = "bird-flock";
+    flock.style.setProperty("--top", `${8 + Math.random() * 38}%`);
+    flock.style.setProperty("--dur", `${18 + Math.random() * 22}s`);
+    flock.style.setProperty("--delay", `${-Math.random() * 20}s`);
+    flock.style.setProperty("--scale", `${0.55 + Math.random() * 0.7}`);
+    const birdsInFlock = 2 + Math.floor(Math.random() * 4);
+    for (let b = 0; b < birdsInFlock; b++) {
+      const bird = document.createElement("span");
+      bird.className = "bird";
+      bird.style.setProperty("--ox", `${b * (14 + Math.random() * 10)}px`);
+      bird.style.setProperty("--oy", `${(Math.random() - 0.5) * 18}px`);
+      bird.style.setProperty("--flap", `${0.28 + Math.random() * 0.22}s`);
+      bird.style.setProperty("--flap-delay", `${-Math.random() * 0.4}s`);
+      bird.innerHTML = `<svg viewBox="0 0 24 10" aria-hidden="true"><path d="M2 6 Q8 2 12 6 Q16 2 22 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+      flock.appendChild(bird);
+    }
+    host.appendChild(flock);
+  }
+  host.dataset.ready = "1";
+}
+
+function initCursor() {
+  const ring = document.getElementById("cursor-ring");
+  const core = document.getElementById("cursor-core");
+  if (!ring || !core) return;
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+
+  document.documentElement.classList.add("has-custom-cursor");
+  let x = window.innerWidth / 2;
+  let y = window.innerHeight / 2;
+  let rx = x;
+  let ry = y;
+
+  window.addEventListener("mousemove", (e) => {
+    x = e.clientX;
+    y = e.clientY;
+    core.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  const tick = () => {
+    rx += (x - rx) * 0.18;
+    ry += (y - ry) * 0.18;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+    requestAnimationFrame(tick);
+  };
+  tick();
+
+  const hoverables = "a, button, summary, .gallery-item, .now-thumb-btn, .filter-btn, .lb-close, .lb-nav";
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest(hoverables)) document.documentElement.classList.add("cursor-hot");
+  });
+  document.addEventListener("mouseout", (e) => {
+    if (e.target.closest(hoverables)) document.documentElement.classList.remove("cursor-hot");
+  });
+}
+
 wireLightbox();
 spawnTownLights();
+spawnBirds();
+initCursor();
 
 Promise.all([
   loadJson("./data/progress.json"),
