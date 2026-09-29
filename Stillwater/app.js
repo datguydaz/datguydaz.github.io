@@ -134,6 +134,14 @@ function renderTimeline(entries) {
       item.appendChild(tags);
     }
 
+    if (entry.pillars?.length) {
+      const pillars = el("div", "tags pillar-tags");
+      for (const p of entry.pillars) {
+        pillars.appendChild(el("span", "tag pillar-tag", p));
+      }
+      item.appendChild(pillars);
+    }
+
     if (entry.screenshots?.length) {
       const shots = el("div", "shots");
       const lbItems = entry.screenshots.map((src) => ({
@@ -297,6 +305,72 @@ function wireLightbox() {
   });
 }
 
+function renderLoreBlock(hostId, block, listKey) {
+  const host = document.getElementById(hostId);
+  if (!host || !block) return;
+  host.innerHTML = "";
+  host.appendChild(el("h3", null, block.title || ""));
+  host.appendChild(el("p", "lore-lede", block.lede || ""));
+  const items = block[listKey] || [];
+  if (items.length) {
+    const ul = el("ul", "lore-list");
+    for (const item of items) ul.appendChild(el("li", null, item));
+    host.appendChild(ul);
+  }
+}
+
+function renderBible(bible, entries) {
+  if (!bible) return;
+
+  const epigraph = document.getElementById("epigraph");
+  if (epigraph) epigraph.textContent = bible.epigraph || "";
+
+  const logline = document.getElementById("lore-logline");
+  if (logline) logline.textContent = bible.logline || "";
+
+  const inspiration = document.getElementById("lore-inspiration");
+  if (inspiration) inspiration.textContent = bible.inspiration || "";
+
+  const prompt = document.getElementById("working-prompt");
+  if (prompt) prompt.textContent = bible.workingPrompt || "";
+
+  renderLoreBlock("lore-fog", bible.fog, "systems");
+  renderLoreBlock("lore-audio", bible.audio, "cues");
+  renderLoreBlock("lore-survival", bible.survival, "tenets");
+
+  const touched = new Map();
+  for (const entry of entries || []) {
+    for (const id of entry.pillars || []) {
+      touched.set(id, (touched.get(id) || 0) + 1);
+    }
+  }
+
+  const ladder = document.getElementById("priority-ladder");
+  if (!ladder) return;
+  ladder.innerHTML = "";
+  const steps = Array.isArray(bible.priority) ? bible.priority : [];
+  steps.forEach((step, index) => {
+    const li = el("li", "priority-step");
+    const count = touched.get(step.id) || 0;
+    if (count > 0) li.classList.add("is-lit");
+
+    const rank = el("div", "priority-rank", String(index + 1).padStart(2, "0"));
+    const body = document.createElement("div");
+    body.appendChild(el("h3", null, step.label || step.id));
+    body.appendChild(el("p", null, step.note || ""));
+    const meta = el(
+      "p",
+      "priority-meta mono",
+      count ? `${count} journal touch${count === 1 ? "" : "es"}` : "Awaiting work"
+    );
+    body.appendChild(meta);
+
+    li.appendChild(rank);
+    li.appendChild(body);
+    ladder.appendChild(li);
+  });
+}
+
 function splitTitle(node) {
   if (!node || node.dataset.split === "1") return;
   const text = node.textContent || "";
@@ -328,6 +402,7 @@ function render(progress, gallery) {
   document.getElementById("build-version").textContent = build;
   document.title = `${name} — Development Journal`;
 
+  renderBible(progress.bible || null, entries);
   renderNow(progress, gallery);
   renderGallery(gallery || { shots: [] });
   renderTimeline(entries);

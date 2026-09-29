@@ -1,14 +1,65 @@
 ﻿{
   "project": "Stillwater",
-  "tagline": "A fogbound survival-horror town where everyone stopped existing.",
+  "tagline": "A fogbound town where everyone stopped existing — and something stayed behind.",
   "updated": "2026-09-29",
-  "build": "0.1.1",
+  "build": "0.1.2",
   "now": {
     "focus": "Blocking atmosphere in the town",
     "map": "Stillwater",
-    "next": "Tighten enemy presentation and keep collecting editor shots"
+    "next": "Safe-room warmth, fog as pressure, one deliberate encounter"
+  },
+  "bible": {
+    "epigraph": "Atmosphere before spectacle. Tension before power fantasy. The fog is not decoration — it is the world thinking.",
+    "logline": "Third-person survival horror in Unreal Engine: a coastal town emptied of people, thick with fog, where scarcity, sound, and what you cannot see matter more than what you can shoot.",
+    "inspiration": "Draws on the design philosophies of classic and modern survival horror — resource dread, oppressive place, psychological weather — while building its own setting, lore, mechanics, visual identity, and horror language.",
+    "priority": [
+      { "id": "atmosphere", "label": "Atmosphere", "note": "Place first. Mood is the product." },
+      { "id": "tension", "label": "Tension", "note": "Threat should linger, not spam." },
+      { "id": "exploration", "label": "Exploration", "note": "Reward looking, listening, returning." },
+      { "id": "survival", "label": "Survival", "note": "Scarcity makes every door a decision." },
+      { "id": "spectacle", "label": "Spectacle", "note": "Earn it. Never lead with it." }
+    ],
+    "fog": {
+      "title": "The Fog",
+      "lede": "Fog is part of Stillwater's identity. It should become more than a visual effect.",
+      "systems": [
+        "Conceal enemies and soften distant silhouettes",
+        "Change visibility and make landmarks unreliable",
+        "Hide and reveal paths as weather shifts",
+        "Pressure navigation and safe-room relief",
+        "Carry sound differently — muffled, close, wrong"
+      ]
+    },
+    "audio": {
+      "title": "Audio as system",
+      "lede": "Treat sound as gameplay. The town should speak before it shows its teeth.",
+      "cues": [
+        "Footsteps and clothing movement",
+        "Breathing and wind through empty streets",
+        "Rain on roofs, building creaks, settling timber",
+        "Electrical hum, fluorescent buzz, pipes",
+        "Distant machinery that may not be machinery"
+      ]
+    },
+    "survival": {
+      "title": "Survival grammar",
+      "lede": "Classic usability with Stillwater weight — limited inventory, deliberate combat, rooms you are reluctant to leave.",
+      "tenets": [
+        "Limited inventory: weapons, ammo, healing, keys, puzzle pieces",
+        "Safe rooms as emotional anchors — warmth against the fog",
+        "Encounters should feel costly and readable",
+        "Exploration loops beat constant forward pressure"
+      ]
+    },
+    "workingPrompt": "Build Stillwater as fogbound third-person survival horror: emptied town, oppressive weather, scarce resources, audio-as-threat, safe rooms that feel like mercy. Prioritize atmosphere, tension, exploration, then survival; spectacle last. Every feature must deepen place, dread, or meaningful choice — never power fantasy for its own sake."
   },
   "versions": [
+    {
+      "id": "0.1.2",
+      "date": "2026-09-29",
+      "title": "Lore on the journal",
+      "summary": "Public site now carries the working design bible — fog, priority ladder, audio tenets — so mood and development progress share one compass."
+    },
     {
       "id": "0.1.1",
       "date": "2026-09-29",
@@ -24,11 +75,21 @@
   ],
   "entries": [
     {
+      "id": "2026-09-29-lore-site",
+      "date": "2026-09-29",
+      "title": "Design bible lives on the journal",
+      "summary": "Folded the original Stillwater prompt into the public site: fog identity, atmosphere→spectacle priority, audio-as-system, survival grammar — so progress is measured against the mood we are building.",
+      "tags": ["vision", "docs", "atmosphere"],
+      "pillars": ["atmosphere", "tension"],
+      "screenshots": []
+    },
+    {
       "id": "2026-09-29-editor-gallery",
       "date": "2026-09-29",
       "title": "Editor captures feed the public gallery",
       "summary": "Added From the editor gallery, Now board, lightbox, and Capture_Stillwater_Shot.py so viewport screenshots land in docs/progress-site and publish on push.",
       "tags": ["docs", "infra", "tools"],
+      "pillars": ["exploration"],
       "screenshots": []
     },
     {
@@ -37,6 +98,7 @@
       "title": "Project settings pass + journal redesign",
       "summary": "Tuned packaging, streaming, and TAA defaults for lighter iteration. Redesigned the public journal into a fuller fogbound site with nav, filters, and version history.",
       "tags": ["infra", "docs", "perf"],
+      "pillars": ["atmosphere"],
       "screenshots": []
     },
     {
@@ -45,6 +107,7 @@
       "title": "Stillwater named, town map locked in",
       "summary": "Renamed from Stillvale, set the town level as the startup scene, and established the survival-horror design pillars.",
       "tags": ["setup", "maps", "vision"],
+      "pillars": ["atmosphere", "exploration", "survival"],
       "screenshots": []
     },
     {
@@ -53,6 +116,7 @@
       "title": "Explored dismembered zombie look on enemies",
       "summary": "Started matching modular zombie visuals to the horror AI characters. Skeleton/anim mismatch left arms wrong — parked for a cleaner pass later.",
       "tags": ["enemies", "animation", "wip"],
+      "pillars": ["tension", "spectacle"],
       "screenshots": []
     },
     {
@@ -61,6 +125,7 @@
       "title": "Git backup + automatic progress site",
       "summary": "Initialized version control for Stillwater-owned files (config, scripts, town map) and added this progressive development journal with GitHub Pages auto-deploy.",
       "tags": ["infra", "docs"],
+      "pillars": ["exploration"],
       "screenshots": []
     }
   ]

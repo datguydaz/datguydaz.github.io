@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stillwater — Development Journal</title>
-  <meta name="description" content="Progress, screenshots, and version history for Stillwater — a fogbound survival-horror town." />
+  <meta name="description" content="Stillwater — fogbound survival horror. Lore, design compass, and development journal." />
   <meta name="theme-color" content="#0a0f10" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,11 +25,12 @@
   <nav class="topnav" aria-label="Primary">
     <a class="brand-mark" href="#top">Stillwater</a>
     <div class="nav-links">
+      <a href="#lore">Lore</a>
+      <a href="#compass">Compass</a>
       <a href="#now">Now</a>
       <a href="#gallery">Gallery</a>
       <a href="#journal">Journal</a>
       <a href="#versions">Versions</a>
-      <a href="#about">About</a>
     </div>
   </nav>
 
@@ -42,14 +43,42 @@
       <span class="title-sheen" aria-hidden="true"></span>
     </div>
     <p id="tagline" class="tagline"></p>
+    <blockquote class="epigraph" id="epigraph"></blockquote>
     <div class="hero-cta">
-      <a class="btn" href="#gallery">From the editor</a>
-      <a class="btn btn-ghost" href="#journal">Read the journal</a>
+      <a class="btn" href="#lore">Enter the town</a>
+      <a class="btn btn-ghost" href="#journal">Development journal</a>
       <p class="meta">Updated <span id="updated"></span> · <span id="entry-count"></span> entries · <span id="shot-count">0</span> shots · build <span id="build-version">—</span></p>
     </div>
   </header>
 
   <main>
+    <section class="section lore-section" id="lore">
+      <div class="section-head">
+        <h2>The town</h2>
+        <p class="section-lede" id="lore-logline"></p>
+      </div>
+      <p class="lore-inspiration" id="lore-inspiration"></p>
+
+      <div class="lore-grid">
+        <article class="lore-block" id="lore-fog"></article>
+        <article class="lore-block" id="lore-audio"></article>
+        <article class="lore-block lore-block-wide" id="lore-survival"></article>
+      </div>
+
+      <div class="working-prompt">
+        <p class="now-label">Working prompt</p>
+        <p id="working-prompt"></p>
+      </div>
+    </section>
+
+    <section class="section" id="compass">
+      <div class="section-head">
+        <h2>Design compass</h2>
+        <p class="section-lede">When a feature is uncertain, climb this ladder. Journal work lights the rungs we have touched.</p>
+      </div>
+      <ol class="priority-ladder" id="priority-ladder"></ol>
+    </section>
+
     <section class="section now-section" id="now">
       <div class="section-head">
         <h2>In the fog right now</h2>
@@ -82,13 +111,13 @@
       <div class="section-head row">
         <div>
           <h2>From the editor</h2>
-          <p class="section-lede">Viewport captures land here automatically when you run the Stillwater shot script in Unreal.</p>
+          <p class="section-lede">Viewport captures land here when the Stillwater shot script runs in Unreal.</p>
         </div>
         <p class="section-meta mono" id="gallery-meta"></p>
       </div>
       <div id="gallery-grid" class="gallery-grid"></div>
       <p class="empty-note" id="gallery-empty" hidden>
-        No captures yet. In Unreal: <code>File → Execute Python Script</code> →
+        No captures yet. In Unreal: <code>Tools → Execute Python Script</code> →
         <code>Scripts/Capture_Stillwater_Shot.py</code>, then commit &amp; push.
       </p>
     </section>
@@ -96,7 +125,7 @@
     <section class="section" id="journal">
       <div class="section-head">
         <h2>Development journal</h2>
-        <p class="section-lede">What changed, what broke, and what we’re chasing next in the town.</p>
+        <p class="section-lede">What changed in the town — measured against the compass above.</p>
       </div>
       <div class="filters" id="filters" hidden></div>
       <ol id="timeline" class="timeline"></ol>
@@ -108,22 +137,6 @@
         <p class="section-lede">Milestones that stick — denser than day-to-day notes.</p>
       </div>
       <ol id="version-list" class="version-list"></ol>
-    </section>
-
-    <section class="section about" id="about">
-      <div class="section-head">
-        <h2>About this record</h2>
-        <p class="section-lede">
-          Private Stillwater repo → public journal. Captures and notes sync when
-          <code>docs/progress-site/</code> is pushed. Editor script writes into
-          <code>screenshots/</code> + <code>data/gallery.json</code>.
-        </p>
-      </div>
-      <ul class="pillars">
-        <li><strong>Isolation</strong> — a town emptied of people, not of presence.</li>
-        <li><strong>Fog as system</strong> — weather and visibility as gameplay, not garnish.</li>
-        <li><strong>Grounded horror</strong> — systems first, spectacle second.</li>
-      </ul>
     </section>
   </main>
 
