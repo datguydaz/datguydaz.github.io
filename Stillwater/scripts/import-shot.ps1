@@ -3,7 +3,7 @@
 param(
   [string]$Image,
   [string]$Note = "Editor capture",
-  [string]$Map = "datguydaz_demo",
+  [string]$Map = "Stillwater",
   [string]$Focus = ""
 )
 
