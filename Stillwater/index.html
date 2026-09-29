@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=0.1.8" />
+  <link rel="stylesheet" href="./styles.css?v=0.1.9" />
 </head>
 <body>
   <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
@@ -36,7 +36,10 @@
         <path d="M0,80 C220,50 440,95 700,75 C960,55 1180,100 1440,80 L1440,120 L0,120 Z"></path>
       </svg>
     </div>
-    <div class="grain"></div>
+    <div class="grain grain-still"></div>
+    <canvas class="film-grain" id="film-grain" width="256" height="256"></canvas>
+    <div class="scanlines"></div>
+    <div class="glitch-tear" id="glitch-tear"></div>
     <div class="vignette"></div>
   </div>
 
@@ -176,6 +179,6 @@
     <button type="button" class="lb-nav next" id="lb-next" aria-label="Next">›</button>
   </div>
 
-  <script src="./app.js?v=0.1.8"></script>
+  <script src="./app.js?v=0.1.9"></script>
 </body>
 </html>

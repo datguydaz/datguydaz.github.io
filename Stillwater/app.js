@@ -482,9 +482,93 @@ function initCursor() {
   });
 }
 
+function initFilmGrain() {
+  const canvas = document.getElementById("film-grain");
+  if (!canvas) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ctx = canvas.getContext("2d", { alpha: true });
+  if (!ctx) return;
+
+  const size = 256;
+  canvas.width = size;
+  canvas.height = size;
+  const image = ctx.createImageData(size, size);
+  const data = image.data;
+
+  const paint = () => {
+    for (let i = 0; i < data.length; i += 4) {
+      const v = (Math.random() * 255) | 0;
+      data[i] = v;
+      data[i + 1] = v;
+      data[i + 2] = v;
+      data[i + 3] = 40 + ((Math.random() * 80) | 0);
+    }
+    ctx.putImageData(image, 0, 0);
+  };
+
+  paint();
+  if (reduce) return;
+
+  let last = 0;
+  const loop = (t) => {
+    if (t - last > 55) {
+      paint();
+      last = t;
+    }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+}
+
+function initGlitch() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+
+  const root = document.documentElement;
+  const tear = document.getElementById("glitch-tear");
+  const title = document.getElementById("project-name");
+  if (title) title.classList.add("is-glitchy");
+
+  let busy = false;
+
+  const burst = (strong = false) => {
+    if (busy || document.hidden) return;
+    busy = true;
+    const top = 8 + Math.random() * 78;
+    const height = strong ? 18 + Math.random() * 28 : 6 + Math.random() * 14;
+    if (tear) {
+      tear.style.top = `${top}%`;
+      tear.style.height = `${height}px`;
+      tear.style.transform = `translateX(${(Math.random() * 16) - 8}px) scaleY(${1.1 + Math.random()})`;
+    }
+    root.classList.add("is-glitching");
+    window.setTimeout(() => {
+      root.classList.remove("is-glitching");
+      busy = false;
+    }, strong ? 280 : 140);
+  };
+
+  const schedule = () => {
+    const wait = 3200 + Math.random() * 7200;
+    window.setTimeout(() => {
+      burst(Math.random() > 0.72);
+      if (Math.random() > 0.55) {
+        window.setTimeout(() => burst(false), 90 + Math.random() * 180);
+      }
+      schedule();
+    }, wait);
+  };
+
+  schedule();
+  // One soft hit after first paint so the effect is noticeable on load
+  window.setTimeout(() => burst(false), 1600);
+}
+
 wireLightbox();
 spawnTownLights();
 initCursor();
+initFilmGrain();
+initGlitch();
 
 Promise.all([
   loadJson("./data/progress.json"),
