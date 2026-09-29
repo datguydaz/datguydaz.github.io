@@ -16,6 +16,7 @@
     <div class="fog fog-a"></div>
     <div class="fog fog-b"></div>
     <div class="fog fog-c"></div>
+    <div class="hero-plate" id="hero-plate"></div>
     <div class="grain"></div>
     <div class="vignette"></div>
     <div class="horizon"></div>
@@ -24,6 +25,8 @@
   <nav class="topnav" aria-label="Primary">
     <a class="brand-mark" href="#top">Stillwater</a>
     <div class="nav-links">
+      <a href="#now">Now</a>
+      <a href="#gallery">Gallery</a>
       <a href="#journal">Journal</a>
       <a href="#versions">Versions</a>
       <a href="#about">About</a>
@@ -35,12 +38,56 @@
     <h1 id="project-name">Stillwater</h1>
     <p id="tagline" class="tagline"></p>
     <div class="hero-cta">
-      <a class="btn" href="#journal">Read the journal</a>
-      <p class="meta">Updated <span id="updated"></span> · <span id="entry-count"></span> entries · build <span id="build-version">—</span></p>
+      <a class="btn" href="#gallery">From the editor</a>
+      <a class="btn btn-ghost" href="#journal">Read the journal</a>
+      <p class="meta">Updated <span id="updated"></span> · <span id="entry-count"></span> entries · <span id="shot-count">0</span> shots · build <span id="build-version">—</span></p>
     </div>
   </header>
 
   <main>
+    <section class="section now-section" id="now">
+      <div class="section-head">
+        <h2>In the fog right now</h2>
+        <p class="section-lede">Live focus pulled from editor captures and journal status.</p>
+      </div>
+      <div class="now-board" id="now-board">
+        <article class="now-card">
+          <p class="now-label">Focus</p>
+          <p class="now-value" id="now-focus">—</p>
+        </article>
+        <article class="now-card">
+          <p class="now-label">Map</p>
+          <p class="now-value mono" id="now-map">—</p>
+        </article>
+        <article class="now-card">
+          <p class="now-label">Next</p>
+          <p class="now-value" id="now-next">—</p>
+        </article>
+        <article class="now-card highlight" id="now-latest-shot" hidden>
+          <p class="now-label">Latest capture</p>
+          <button type="button" class="now-thumb-btn" id="now-thumb-btn" aria-label="Open latest screenshot">
+            <img id="now-thumb" alt="" />
+          </button>
+          <p class="now-caption mono" id="now-caption"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-head row">
+        <div>
+          <h2>From the editor</h2>
+          <p class="section-lede">Viewport captures land here automatically when you run the Stillwater shot script in Unreal.</p>
+        </div>
+        <p class="section-meta mono" id="gallery-meta"></p>
+      </div>
+      <div id="gallery-grid" class="gallery-grid"></div>
+      <p class="empty-note" id="gallery-empty" hidden>
+        No captures yet. In Unreal: <code>File → Execute Python Script</code> →
+        <code>Scripts/Capture_Stillwater_Shot.py</code>, then commit &amp; push.
+      </p>
+    </section>
+
     <section class="section" id="journal">
       <div class="section-head">
         <h2>Development journal</h2>
@@ -62,9 +109,9 @@
       <div class="section-head">
         <h2>About this record</h2>
         <p class="section-lede">
-          This site rebuilds automatically when the private Stillwater repo updates
-          <code>docs/progress-site/</code>. Screenshots drop into
-          <code>screenshots/</code>; entries live in <code>data/progress.json</code>.
+          Private Stillwater repo → public journal. Captures and notes sync when
+          <code>docs/progress-site/</code> is pushed. Editor script writes into
+          <code>screenshots/</code> + <code>data/gallery.json</code>.
         </p>
       </div>
       <ul class="pillars">
@@ -82,6 +129,16 @@
     </div>
     <p class="footer-meta">datguydaz · Unreal Engine 5.8</p>
   </footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" class="lb-close" id="lb-close" aria-label="Close">×</button>
+    <button type="button" class="lb-nav prev" id="lb-prev" aria-label="Previous">‹</button>
+    <figure class="lb-frame">
+      <img id="lb-img" alt="" />
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <button type="button" class="lb-nav next" id="lb-next" aria-label="Next">›</button>
+  </div>
 
   <script src="./app.js"></script>
 </body>

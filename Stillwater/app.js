@@ -1,6 +1,6 @@
-async function loadProgress() {
-  const res = await fetch("./data/progress.json", { cache: "no-store" });
-  if (!res.ok) throw new Error("Could not load progress.json");
+async function loadJson(path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Could not load ${path}`);
   return res.json();
 }
 
@@ -12,9 +12,65 @@ function el(tag, className, text) {
 }
 
 function shotUrl(src) {
-  if (src.startsWith("http") || src.startsWith("./") || src.startsWith("../")) return src;
+  if (!src) return "";
+  if (src.startsWith("http") || src.startsWith("./") || src.startsWith("../") || src.startsWith("screenshots/")) {
+    return src.startsWith("screenshots/") ? `./${src}` : src;
+  }
   return `./screenshots/${src}`;
 }
+
+function formatWhen(iso) {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return iso;
+  }
+}
+
+/* —— Lightbox —— */
+const lightbox = {
+  items: [],
+  index: 0,
+  root: null,
+  img: null,
+  cap: null,
+  open(items, index) {
+    this.items = items;
+    this.index = index;
+    this.root = document.getElementById("lightbox");
+    this.img = document.getElementById("lb-img");
+    this.cap = document.getElementById("lb-cap");
+    this.root.hidden = false;
+    document.body.style.overflow = "hidden";
+    this.render();
+  },
+  close() {
+    if (!this.root) return;
+    this.root.hidden = true;
+    document.body.style.overflow = "";
+  },
+  step(delta) {
+    if (!this.items.length) return;
+    this.index = (this.index + delta + this.items.length) % this.items.length;
+    this.render();
+  },
+  render() {
+    const item = this.items[this.index];
+    if (!item) return;
+    this.img.src = item.src;
+    this.img.alt = item.caption || "Stillwater capture";
+    this.cap.textContent = item.caption || "";
+  },
+};
 
 function uniqueTags(entries) {
   const set = new Set();
@@ -44,25 +100,20 @@ function renderFilters(entries) {
     }
   };
 
-  const allBtn = el("button", "filter-btn is-active", "All");
-  allBtn.type = "button";
-  allBtn.dataset.tag = "all";
-  allBtn.addEventListener("click", () => {
-    active = "all";
-    apply();
-  });
-  host.appendChild(allBtn);
-
-  for (const tag of tags) {
-    const btn = el("button", "filter-btn", tag);
+  const makeBtn = (label, tag) => {
+    const btn = el("button", "filter-btn", label);
     btn.type = "button";
     btn.dataset.tag = tag;
+    if (tag === "all") btn.classList.add("is-active");
     btn.addEventListener("click", () => {
       active = tag;
       apply();
     });
     host.appendChild(btn);
-  }
+  };
+
+  makeBtn("All", "all");
+  for (const tag of tags) makeBtn(tag, tag);
 }
 
 function renderTimeline(entries) {
@@ -85,13 +136,27 @@ function renderTimeline(entries) {
 
     if (entry.screenshots?.length) {
       const shots = el("div", "shots");
-      for (const src of entry.screenshots) {
+      const lbItems = entry.screenshots.map((src) => ({
+        src: shotUrl(src),
+        caption: `${entry.date || ""} · ${entry.title || ""}`.trim(),
+      }));
+      entry.screenshots.forEach((src, i) => {
         const img = document.createElement("img");
         img.src = shotUrl(src);
         img.alt = entry.title || "Stillwater screenshot";
         img.loading = "lazy";
+        img.tabIndex = 0;
+        img.style.cursor = "zoom-in";
+        const open = () => lightbox.open(lbItems, i);
+        img.addEventListener("click", open);
+        img.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open();
+          }
+        });
         shots.appendChild(img);
-      }
+      });
       item.appendChild(shots);
     }
 
@@ -130,23 +195,132 @@ function renderVersions(versions, fallbackBuild) {
   }
 }
 
-function render(data) {
-  document.getElementById("project-name").textContent = data.project || "Stillwater";
-  document.getElementById("tagline").textContent = data.tagline || "";
-  document.getElementById("updated").textContent = data.updated || "—";
-  const entries = Array.isArray(data.entries) ? data.entries : [];
-  document.getElementById("entry-count").textContent = String(entries.length);
+function renderNow(progress, gallery) {
+  const now = progress.now || {};
+  document.getElementById("now-focus").textContent = now.focus || "Exploring the demo slice";
+  document.getElementById("now-map").textContent = now.map || "datguydaz_demo";
+  document.getElementById("now-next").textContent = now.next || "Keep shaping atmosphere and encounters";
 
-  const build = data.build || data.versions?.[0]?.id || "0.1";
-  document.getElementById("build-version").textContent = build;
-  document.title = `${data.project || "Stillwater"} — Development Journal`;
+  const shots = Array.isArray(gallery?.shots) ? gallery.shots : [];
+  const latest = shots[0];
+  const wrap = document.getElementById("now-latest-shot");
+  const plate = document.getElementById("hero-plate");
 
-  renderTimeline(entries);
-  renderVersions(data.versions || [], build);
+  if (latest) {
+    const src = shotUrl(latest.file);
+    wrap.hidden = false;
+    const thumb = document.getElementById("now-thumb");
+    thumb.src = src;
+    thumb.alt = latest.note || latest.map || "Latest Stillwater capture";
+    document.getElementById("now-caption").textContent =
+      [latest.map, formatWhen(latest.capturedAt) || latest.date].filter(Boolean).join(" · ");
+
+    document.getElementById("now-thumb-btn").onclick = () => {
+      const items = shots.map((s) => ({
+        src: shotUrl(s.file),
+        caption: [s.note || s.map, formatWhen(s.capturedAt) || s.date].filter(Boolean).join(" · "),
+      }));
+      lightbox.open(items, 0);
+    };
+
+    plate.style.backgroundImage = `url("${src}")`;
+    plate.classList.add("is-on");
+  } else {
+    wrap.hidden = true;
+    plate.classList.remove("is-on");
+  }
 }
 
-loadProgress()
-  .then(render)
+function renderGallery(gallery) {
+  const grid = document.getElementById("gallery-grid");
+  const empty = document.getElementById("gallery-empty");
+  const meta = document.getElementById("gallery-meta");
+  grid.innerHTML = "";
+
+  const shots = Array.isArray(gallery?.shots) ? [...gallery.shots] : [];
+  shots.sort((a, b) => String(b.capturedAt || b.date || "").localeCompare(String(a.capturedAt || a.date || "")));
+
+  document.getElementById("shot-count").textContent = String(shots.length);
+  meta.textContent = shots.length
+    ? `${shots.length} capture${shots.length === 1 ? "" : "s"} · newest first`
+    : "Waiting for first editor capture";
+
+  if (!shots.length) {
+    empty.hidden = false;
+    return;
+  }
+  empty.hidden = true;
+
+  const lbItems = shots.map((s) => ({
+    src: shotUrl(s.file),
+    caption: [s.note || "Editor capture", s.map, formatWhen(s.capturedAt) || s.date]
+      .filter(Boolean)
+      .join(" · "),
+  }));
+
+  shots.forEach((shot, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "gallery-item";
+    btn.style.animationDelay = `${Math.min(index, 8) * 60}ms`;
+
+    const img = document.createElement("img");
+    img.src = shotUrl(shot.file);
+    img.alt = shot.note || "Stillwater editor capture";
+    img.loading = "lazy";
+
+    const cap = document.createElement("figcaption");
+    cap.textContent = [shot.map || "viewport", formatWhen(shot.capturedAt) || shot.date || ""]
+      .filter(Boolean)
+      .join(" · ");
+
+    btn.appendChild(img);
+    btn.appendChild(cap);
+    btn.addEventListener("click", () => lightbox.open(lbItems, index));
+    grid.appendChild(btn);
+  });
+}
+
+function wireLightbox() {
+  document.getElementById("lb-close").addEventListener("click", () => lightbox.close());
+  document.getElementById("lb-prev").addEventListener("click", () => lightbox.step(-1));
+  document.getElementById("lb-next").addEventListener("click", () => lightbox.step(1));
+  document.getElementById("lightbox").addEventListener("click", (e) => {
+    if (e.target.id === "lightbox") lightbox.close();
+  });
+  window.addEventListener("keydown", (e) => {
+    const open = !document.getElementById("lightbox").hidden;
+    if (!open) return;
+    if (e.key === "Escape") lightbox.close();
+    if (e.key === "ArrowLeft") lightbox.step(-1);
+    if (e.key === "ArrowRight") lightbox.step(1);
+  });
+}
+
+function render(progress, gallery) {
+  document.getElementById("project-name").textContent = progress.project || "Stillwater";
+  document.getElementById("tagline").textContent = progress.tagline || "";
+  document.getElementById("updated").textContent = progress.updated || "—";
+  const entries = Array.isArray(progress.entries) ? progress.entries : [];
+  document.getElementById("entry-count").textContent = String(entries.length);
+
+  const build = progress.build || progress.versions?.[0]?.id || "0.1";
+  document.getElementById("build-version").textContent = build;
+  document.title = `${progress.project || "Stillwater"} — Development Journal`;
+
+  renderNow(progress, gallery);
+  renderGallery(gallery || { shots: [] });
+  renderTimeline(entries);
+  renderVersions(progress.versions || [], build);
+}
+
+wireLightbox();
+
+Promise.all([
+  loadJson("./data/progress.json"),
+  loadJson("./data/gallery.json").catch(() => ({ shots: [] })),
+])
+  .then(([progress, gallery]) => render(progress, gallery))
   .catch((err) => {
     document.getElementById("tagline").textContent = "Progress data missing or failed to load.";
     console.error(err);

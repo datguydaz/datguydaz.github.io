@@ -2,8 +2,19 @@
   "project": "Stillwater",
   "tagline": "A fogbound survival-horror town where everyone stopped existing.",
   "updated": "2026-09-29",
-  "build": "0.1.0",
+  "build": "0.1.1",
+  "now": {
+    "focus": "Blocking atmosphere and capturing the demo slice",
+    "map": "datguydaz_demo",
+    "next": "Drop editor shots into the gallery, then tighten enemy presentation"
+  },
   "versions": [
+    {
+      "id": "0.1.1",
+      "date": "2026-09-29",
+      "title": "Editor gallery pipeline",
+      "summary": "Public journal gained a live Now board, editor capture gallery with lightbox, and an Unreal Python shot script that feeds screenshots automatically."
+    },
     {
       "id": "0.1.0",
       "date": "2026-09-29",
@@ -12,6 +23,14 @@
     }
   ],
   "entries": [
+    {
+      "id": "2026-09-29-editor-gallery",
+      "date": "2026-09-29",
+      "title": "Editor captures feed the public gallery",
+      "summary": "Added From the editor gallery, Now board, lightbox, and Capture_Stillwater_Shot.py so viewport screenshots land in docs/progress-site and publish on push.",
+      "tags": ["docs", "infra", "tools"],
+      "screenshots": []
+    },
     {
       "id": "2026-09-29-site-tune",
       "date": "2026-09-29",
