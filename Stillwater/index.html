@@ -4,32 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Stillwater — Development Journal</title>
-  <meta name="description" content="Stillwater — fogbound survival horror. Development journal, captures, and lore reference." />
+  <meta name="description" content="Stillwater — fogbound survival horror. Development journal beside foundational lore." />
   <meta name="theme-color" content="#0a0f10" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=0.1.4" />
+  <link rel="stylesheet" href="./styles.css?v=0.1.5" />
 </head>
 <body>
   <div class="atmosphere" aria-hidden="true">
+    <div class="sky-glow"></div>
     <div class="fog fog-a"></div>
     <div class="fog fog-b"></div>
     <div class="fog fog-c"></div>
+    <div class="fog fog-low"></div>
     <div class="hero-plate" id="hero-plate"></div>
+    <div class="town-lights" id="town-lights"></div>
+    <div class="beams"></div>
+    <div class="lake">
+      <div class="lake-glow"></div>
+      <svg class="wave wave-1" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,60 C240,100 480,20 720,60 C960,100 1200,30 1440,70 L1440,120 L0,120 Z"></path>
+      </svg>
+      <svg class="wave wave-2" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,70 C300,30 560,110 820,65 C1080,20 1260,90 1440,55 L1440,120 L0,120 Z"></path>
+      </svg>
+      <svg class="wave wave-3" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,80 C220,50 440,95 700,75 C960,55 1180,100 1440,80 L1440,120 L0,120 Z"></path>
+      </svg>
+    </div>
     <div class="grain"></div>
     <div class="vignette"></div>
-    <div class="horizon"></div>
   </div>
 
   <nav class="topnav" aria-label="Primary">
     <a class="brand-mark" href="#top">Stillwater</a>
     <div class="nav-links">
-      <a href="#now">Now</a>
+      <a href="#development">Development</a>
+      <a href="#lore">Lore</a>
       <a href="#gallery">Gallery</a>
       <a href="#journal">Journal</a>
-      <a href="#lore">Lore</a>
-      <a href="#compass">Compass</a>
     </div>
   </nav>
 
@@ -44,96 +58,103 @@
     <p id="tagline" class="tagline"></p>
     <blockquote class="epigraph" id="epigraph"></blockquote>
     <div class="hero-cta">
-      <a class="btn" href="#journal">Development journal</a>
-      <a class="btn btn-ghost" href="#gallery">From the editor</a>
+      <a class="btn" href="#development">Development</a>
+      <a class="btn btn-ghost" href="#lore">Lore</a>
       <p class="meta">Updated <span id="updated"></span> · <span id="entry-count"></span> entries · <span id="shot-count">0</span> shots · build <span id="build-version">—</span></p>
     </div>
   </header>
 
-  <main>
-    <section class="section now-section" id="now">
-      <div class="section-head">
-        <h2>In the fog right now</h2>
-        <p class="section-lede">Live focus pulled from editor captures and journal status.</p>
+  <main class="split-shell">
+    <div class="col col-dev" id="development">
+      <div class="col-banner">
+        <p class="col-kicker">Column I</p>
+        <h2>Development</h2>
+        <p>Progress, captures, and what we’re building in the town.</p>
       </div>
-      <div class="now-board" id="now-board">
-        <article class="now-card">
-          <p class="now-label">Focus</p>
-          <p class="now-value" id="now-focus">—</p>
-        </article>
-        <article class="now-card">
-          <p class="now-label">Map</p>
-          <p class="now-value mono" id="now-map">—</p>
-        </article>
-        <article class="now-card">
-          <p class="now-label">Next</p>
-          <p class="now-value" id="now-next">—</p>
-        </article>
-        <article class="now-card highlight" id="now-latest-shot" hidden>
-          <p class="now-label">Latest capture</p>
-          <button type="button" class="now-thumb-btn" id="now-thumb-btn" aria-label="Open latest screenshot">
-            <img id="now-thumb" alt="" />
-          </button>
-          <p class="now-caption mono" id="now-caption"></p>
-        </article>
-      </div>
-    </section>
 
-    <section class="section" id="gallery">
-      <div class="section-head row">
-        <div>
-          <h2>From the editor</h2>
-          <p class="section-lede">Viewport captures land here when the Stillwater shot script runs in Unreal.</p>
+      <section class="section now-section" id="now">
+        <div class="section-head">
+          <h3>In the fog right now</h3>
+          <p class="section-lede">Live focus from captures and journal status.</p>
         </div>
-        <p class="section-meta mono" id="gallery-meta"></p>
-      </div>
-      <div id="gallery-grid" class="gallery-grid"></div>
-      <p class="empty-note" id="gallery-empty" hidden>
-        No captures yet. In Unreal: <code>Tools → Execute Python Script</code> →
-        <code>Scripts/Capture_Stillwater_Shot.py</code>, then commit &amp; push.
-      </p>
-    </section>
-
-    <section class="section" id="journal">
-      <div class="section-head">
-        <h2>Development journal</h2>
-        <p class="section-lede">What changed in the town — measured against the compass.</p>
-      </div>
-      <div class="filters" id="filters" hidden></div>
-      <ol id="timeline" class="timeline"></ol>
-    </section>
-
-    <section class="section" id="versions">
-      <div class="section-head">
-        <h2>Version history</h2>
-        <p class="section-lede">Milestones that stick.</p>
-      </div>
-      <ol id="version-list" class="version-list"></ol>
-    </section>
-
-    <section class="section lore-section" id="lore">
-      <div class="section-head row">
-        <div>
-          <h2>Lore reference</h2>
-          <p class="section-lede" id="lore-logline"></p>
+        <div class="now-board" id="now-board">
+          <article class="now-card">
+            <p class="now-label">Focus</p>
+            <p class="now-value" id="now-focus">—</p>
+          </article>
+          <article class="now-card">
+            <p class="now-label">Map</p>
+            <p class="now-value mono" id="now-map">—</p>
+          </article>
+          <article class="now-card">
+            <p class="now-label">Next</p>
+            <p class="now-value" id="now-next">—</p>
+          </article>
+          <article class="now-card highlight" id="now-latest-shot" hidden>
+            <p class="now-label">Latest capture</p>
+            <button type="button" class="now-thumb-btn" id="now-thumb-btn" aria-label="Open latest screenshot">
+              <img id="now-thumb" alt="" />
+            </button>
+            <p class="now-caption mono" id="now-caption"></p>
+          </article>
         </div>
-      </div>
-      <p class="lore-inspiration" id="lore-inspiration"></p>
-      <div class="lore-accordion" id="lore-chapters"></div>
+      </section>
 
-      <div class="lore-side-grid">
-        <div>
-          <h3 class="subhead" id="rules-title">Narrative rules</h3>
-          <p class="section-lede tight" id="rules-lede"></p>
-          <ul class="lore-list rules-list" id="rules-list"></ul>
+      <section class="section" id="gallery">
+        <div class="section-head row">
+          <div>
+            <h3>From the editor</h3>
+            <p class="section-lede">Viewport captures from Unreal.</p>
+          </div>
+          <p class="section-meta mono" id="gallery-meta"></p>
         </div>
+        <div id="gallery-grid" class="gallery-grid"></div>
+        <p class="empty-note" id="gallery-empty" hidden>
+          No captures yet. Run <code>Scripts/Capture_Stillwater_Shot.py</code>, then commit &amp; push.
+        </p>
+      </section>
+
+      <section class="section" id="journal">
+        <div class="section-head">
+          <h3>Development journal</h3>
+          <p class="section-lede">What changed — measured against the compass.</p>
+        </div>
+        <div class="filters" id="filters" hidden></div>
+        <ol id="timeline" class="timeline"></ol>
+      </section>
+
+      <section class="section" id="versions">
+        <div class="section-head">
+          <h3>Version history</h3>
+          <p class="section-lede">Milestones that stick.</p>
+        </div>
+        <ol id="version-list" class="version-list"></ol>
+      </section>
+    </div>
+
+    <div class="col col-lore" id="lore">
+      <div class="col-banner lore-banner">
+        <p class="col-kicker">Column II</p>
+        <h2>Lore</h2>
+        <p>The Incident, the lake, Resonance — and the rules we build by.</p>
+      </div>
+
+      <section class="section lore-section">
+        <p class="section-lede" id="lore-logline"></p>
+        <p class="lore-inspiration" id="lore-inspiration"></p>
+        <div class="lore-accordion" id="lore-chapters"></div>
+
+        <h3 class="subhead" id="rules-title">Narrative rules</h3>
+        <p class="section-lede tight" id="rules-lede"></p>
+        <ul class="lore-list rules-list" id="rules-list"></ul>
+
         <div id="compass">
           <h3 class="subhead">Design compass</h3>
-          <p class="section-lede tight">When unsure, climb this ladder. Journal work lights the rungs.</p>
+          <p class="section-lede tight">When unsure, climb this ladder.</p>
           <ol class="priority-ladder compact" id="priority-ladder"></ol>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -154,6 +175,6 @@
     <button type="button" class="lb-nav next" id="lb-next" aria-label="Next">›</button>
   </div>
 
-  <script src="./app.js?v=0.1.4"></script>
+  <script src="./app.js?v=0.1.5"></script>
 </body>
 </html>

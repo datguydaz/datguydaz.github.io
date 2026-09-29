@@ -424,7 +424,25 @@ function render(progress, gallery) {
   renderVersions(progress.versions || [], build);
 }
 
+function spawnTownLights() {
+  const host = document.getElementById("town-lights");
+  if (!host || host.dataset.ready === "1") return;
+  const count = 28;
+  for (let i = 0; i < count; i++) {
+    const light = document.createElement("span");
+    light.className = "town-light";
+    light.style.left = `${4 + Math.random() * 92}%`;
+    light.style.bottom = `${10 + Math.random() * 28}%`;
+    light.style.setProperty("--s", `${1.2 + Math.random() * 2.4}px`);
+    light.style.setProperty("--d", `${2 + Math.random() * 5}s`);
+    light.style.setProperty("--o", `${0.25 + Math.random() * 0.55}`);
+    host.appendChild(light);
+  }
+  host.dataset.ready = "1";
+}
+
 wireLightbox();
+spawnTownLights();
 
 Promise.all([
   loadJson("./data/progress.json"),
