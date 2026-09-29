@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stillwater — Development Journal</title>
+  <meta name="description" content="Progress, screenshots, and version history for Stillwater." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="fog" aria-hidden="true"></div>
+  <header class="hero">
+    <p class="eyebrow">Development journal</p>
+    <h1 id="project-name">Stillwater</h1>
+    <p id="tagline" class="tagline"></p>
+    <p class="meta">Last updated <span id="updated"></span> · <span id="entry-count"></span> entries</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Timeline</h2>
+      <ol id="timeline" class="timeline"></ol>
+    </section>
+
+    <section class="panel">
+      <h2>How this updates</h2>
+      <p class="note">
+        Every push to <code>main</code> rebuilds this site. Add an entry in
+        <code>docs/progress-site/data/progress.json</code>, drop screenshots into
+        <code>docs/progress-site/screenshots/</code>, commit, and push — GitHub Pages refreshes automatically.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Stillwater · private development record</p>
+  </footer>
+  <script src="./app.js"></script>
+</body>
+</html>

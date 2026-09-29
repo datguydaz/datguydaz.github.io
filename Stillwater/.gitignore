@@ -1,0 +1,4 @@
+# Auto-built site output
+dist/
+node_modules/
+.cache/
