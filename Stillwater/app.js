@@ -447,33 +447,6 @@ function spawnTownLights() {
   host.dataset.ready = "1";
 }
 
-function spawnBirds() {
-  const host = document.getElementById("birds");
-  if (!host || host.dataset.ready === "1") return;
-  const flockCount = 5;
-  for (let f = 0; f < flockCount; f++) {
-    const flock = document.createElement("div");
-    flock.className = "bird-flock";
-    flock.style.setProperty("--top", `${8 + Math.random() * 38}%`);
-    flock.style.setProperty("--dur", `${18 + Math.random() * 22}s`);
-    flock.style.setProperty("--delay", `${-Math.random() * 20}s`);
-    flock.style.setProperty("--scale", `${0.55 + Math.random() * 0.7}`);
-    const birdsInFlock = 2 + Math.floor(Math.random() * 4);
-    for (let b = 0; b < birdsInFlock; b++) {
-      const bird = document.createElement("span");
-      bird.className = "bird";
-      bird.style.setProperty("--ox", `${b * (14 + Math.random() * 10)}px`);
-      bird.style.setProperty("--oy", `${(Math.random() - 0.5) * 18}px`);
-      bird.style.setProperty("--flap", `${0.28 + Math.random() * 0.22}s`);
-      bird.style.setProperty("--flap-delay", `${-Math.random() * 0.4}s`);
-      bird.innerHTML = `<svg viewBox="0 0 24 10" aria-hidden="true"><path d="M2 6 Q8 2 12 6 Q16 2 22 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
-      flock.appendChild(bird);
-    }
-    host.appendChild(flock);
-  }
-  host.dataset.ready = "1";
-}
-
 function initCursor() {
   const ring = document.getElementById("cursor-ring");
   const core = document.getElementById("cursor-core");
@@ -511,7 +484,6 @@ function initCursor() {
 
 wireLightbox();
 spawnTownLights();
-spawnBirds();
 initCursor();
 
 Promise.all([
