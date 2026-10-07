@@ -22,10 +22,14 @@ body {
 }
 
 .world,
+.torch,
+.eyes,
 .grit,
 .scum,
 .vignette,
+.smoke,
 .embers,
+.dust,
 .corners {
   pointer-events: none;
   position: fixed !important;
@@ -36,10 +40,59 @@ body {
 .world {
   z-index: 0;
   background:
-    linear-gradient(180deg, rgba(8,9,6,.12) 0%, rgba(6,7,5,.35) 70%, rgba(5,6,4,.88) 100%),
-    url("./hexwrought-grounds.jpg") center 20% / cover no-repeat;
+    linear-gradient(180deg, rgba(8,9,6,.08) 0%, rgba(6,7,5,.22) 70%, rgba(5,6,4,.72) 100%),
+    url("./hexwrought-grounds.jpg") center 28% / cover no-repeat;
   background-attachment: fixed;
-  filter: contrast(1.08) saturate(0.9) brightness(0.95);
+  animation: hall 2.6s ease-in-out infinite;
+}
+
+.torch { z-index: 1; }
+.flame {
+  position: absolute;
+  left: 6.5%;
+  top: 26%;
+  width: min(24vw, 300px);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  animation: flare 0.16s infinite;
+  filter: saturate(1.35) brightness(1.25) contrast(1.1);
+}
+.wash {
+  position: absolute;
+  left: 0;
+  top: 8%;
+  width: 58vw;
+  height: 78vh;
+  background: radial-gradient(ellipse at 16% 40%, rgba(255, 150, 50, 0.42) 0%, rgba(255, 90, 20, 0.14) 26%, transparent 60%);
+  mix-blend-mode: screen;
+  animation: wash 0.21s infinite;
+}
+.lick {
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  width: 18vw;
+  height: 28vh;
+  background: radial-gradient(circle, rgba(255, 220, 140, 0.55) 0%, rgba(255, 120, 30, 0.18) 38%, transparent 70%);
+  mix-blend-mode: screen;
+  filter: blur(8px);
+  animation: lick 0.13s infinite;
+}
+
+.eyes {
+  z-index: 1;
+  width: 70px;
+  height: 18px;
+  left: auto;
+  right: 27%;
+  top: 36%;
+  inset: auto;
+  background:
+    radial-gradient(circle at 22% 50%, rgba(255, 210, 130, 0.7) 0 18%, transparent 42%),
+    radial-gradient(circle at 78% 50%, rgba(255, 210, 130, 0.7) 0 18%, transparent 42%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  animation: watch 5.4s ease-in-out infinite;
 }
 
 .grit {
@@ -79,6 +132,21 @@ body {
 .corners img:nth-child(3) { bottom: -4%; left: -4%; transform: scaleY(-1); }
 .corners img:nth-child(4) { bottom: -4%; right: -4%; transform: scale(-1); }
 
+.smoke { z-index: 3; }
+.smoke i {
+  position: absolute;
+  left: 14%;
+  top: 34%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(40, 32, 24, 0.35), transparent 70%);
+  filter: blur(18px);
+  animation: smoke 7s ease-out infinite;
+}
+.smoke i:nth-child(2) { left: 16%; animation-delay: 2.2s; width: 70px; height: 70px; }
+.smoke i:nth-child(3) { left: 12%; animation-delay: 4.4s; width: 110px; height: 110px; }
+
 .embers { z-index: 4; }
 .embers i {
   position: absolute;
@@ -87,26 +155,96 @@ body {
   border-radius: 50%;
   background: #f0c56a;
   box-shadow: 0 0 10px 3px rgba(224, 106, 40, 0.65);
-  animation: rise 11s linear infinite;
+  animation: rise 7.5s linear infinite;
   opacity: 0.7;
 }
-.embers i:nth-child(1) { left: 18%; bottom: 4%; animation-delay: 0s; }
-.embers i:nth-child(2) { left: 32%; bottom: 0; animation-delay: 2s; width: 2px; height: 2px; }
-.embers i:nth-child(3) { left: 48%; bottom: 8%; animation-delay: 4s; }
-.embers i:nth-child(4) { left: 61%; bottom: 2%; animation-delay: 1.5s; }
-.embers i:nth-child(5) { left: 73%; bottom: 6%; animation-delay: 5s; width: 2px; height: 2px; }
-.embers i:nth-child(6) { left: 12%; bottom: 10%; animation-delay: 7s; }
-.embers i:nth-child(7) { left: 84%; bottom: 3%; animation-delay: 3s; }
-.embers i:nth-child(8) { left: 41%; bottom: 12%; animation-delay: 8s; }
+.embers i:nth-child(1) { left: 15%; top: 48%; animation-delay: 0s; }
+.embers i:nth-child(2) { left: 17%; top: 52%; animation-delay: 0.6s; width: 2px; height: 2px; }
+.embers i:nth-child(3) { left: 13%; top: 50%; animation-delay: 1.2s; }
+.embers i:nth-child(4) { left: 19%; top: 46%; animation-delay: 1.8s; }
+.embers i:nth-child(5) { left: 16%; top: 54%; animation-delay: 2.4s; width: 2px; height: 2px; }
+.embers i:nth-child(6) { left: 12%; top: 49%; animation-delay: 3s; }
+.embers i:nth-child(7) { left: 21%; top: 51%; animation-delay: 3.6s; }
+.embers i:nth-child(8) { left: 14%; top: 56%; animation-delay: 4.2s; }
+.embers i:nth-child(9) { left: 18%; top: 44%; animation-delay: 4.8s; width: 2px; height: 2px; }
+.embers i:nth-child(10) { left: 11%; top: 53%; animation-delay: 5.4s; }
+.embers i:nth-child(11) { left: 22%; top: 47%; animation-delay: 6s; }
+.embers i:nth-child(12) { left: 32%; top: 70%; animation-delay: 1s; }
+.embers i:nth-child(13) { left: 48%; top: 78%; animation-delay: 2.8s; width: 2px; height: 2px; }
+.embers i:nth-child(14) { left: 70%; top: 62%; animation-delay: 5s; }
 
+.dust { z-index: 4; }
+.dust i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(232, 215, 176, 0.55);
+  box-shadow: 0 0 6px rgba(232, 215, 176, 0.4);
+  animation: mote 16s linear infinite;
+}
+.dust i:nth-child(1) { left: 22%; top: 70%; animation-delay: 0s; }
+.dust i:nth-child(2) { left: 38%; top: 60%; animation-delay: 2s; }
+.dust i:nth-child(3) { left: 54%; top: 75%; animation-delay: 4s; }
+.dust i:nth-child(4) { left: 67%; top: 52%; animation-delay: 6s; }
+.dust i:nth-child(5) { left: 28%; top: 40%; animation-delay: 8s; }
+.dust i:nth-child(6) { left: 81%; top: 58%; animation-delay: 10s; }
+.dust i:nth-child(7) { left: 45%; top: 32%; animation-delay: 12s; }
+.dust i:nth-child(8) { left: 12%; top: 28%; animation-delay: 14s; }
+
+@keyframes hall {
+  0%, 100% { filter: contrast(1.08) saturate(1) brightness(1); }
+  35% { filter: contrast(1.12) saturate(1.1) brightness(1.07); }
+  62% { filter: contrast(1.05) saturate(0.94) brightness(0.93); }
+}
+@keyframes flare {
+  0% { transform: translate(-8%, -6%) scale(1, 1) rotate(-2deg); opacity: 0.82; }
+  25% { transform: translate(-6%, -10%) scale(1.08, 1.18) rotate(2deg); opacity: 1; }
+  50% { transform: translate(-10%, -4%) scale(0.9, 1.02) rotate(-1deg); opacity: 0.68; }
+  75% { transform: translate(-5%, -12%) scale(1.12, 1.22) rotate(1deg); opacity: 1; }
+  100% { transform: translate(-8%, -6%) scale(1.02, 1.08) rotate(-2deg); opacity: 0.9; }
+}
+@keyframes wash {
+  0%, 100% { opacity: 0.75; }
+  20% { opacity: 1; }
+  45% { opacity: 0.55; }
+  70% { opacity: 0.95; }
+}
+@keyframes lick {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  40% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.85); opacity: 0.4; }
+}
+@keyframes watch {
+  0%, 78%, 100% { opacity: 0.15; }
+  82% { opacity: 0.85; }
+  88% { opacity: 0.2; }
+  92% { opacity: 0.7; }
+}
+@keyframes smoke {
+  0% { transform: translate(0, 0) scale(0.7); opacity: 0; }
+  20% { opacity: 0.45; }
+  100% { transform: translate(30px, -220px) scale(1.8); opacity: 0; }
+}
 @keyframes rise {
-  0% { transform: translateY(0) scale(1); opacity: 0; }
-  12% { opacity: 0.8; }
-  100% { transform: translateY(-90vh) scale(0.4); opacity: 0; }
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-70vh) translateX(18px) scale(0.3); opacity: 0; }
+}
+@keyframes mote {
+  0% { transform: translate(0, 0); opacity: 0; }
+  15% { opacity: 0.7; }
+  100% { transform: translate(40px, -50vh); opacity: 0; }
 }
 @keyframes drift {
   from { background-position: 0 0; }
   to { background-position: 520px 260px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world, .flame, .wash, .lick, .eyes, .embers i, .dust i, .smoke i, .grit {
+    animation: none;
+  }
 }
 
 header, main, footer { position: relative; z-index: 5; }
