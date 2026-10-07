@@ -3,67 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hexwrought — Development Journal</title>
-  <meta name="description" content="Hexwrought development status. Separate from Stillwater.">
+  <title>Hexwrought</title>
+  <meta name="description" content="Hexwrought — first-person battlemage. The sword stays a sword. Magic changes what the next cut does.">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <nav>
-    <a class="brand" href="#top">Hexwrought</a>
-    <div class="links">
-      <a href="#development">Development</a>
-      <a href="#journal">Journal</a>
-    </div>
-  </nav>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
 
-  <header id="top">
-    <p class="kicker">UE 5.8 · first-person battlemage</p>
+  <header class="hero">
+    <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.1">
+        <polygon points="100,12 176,56 176,144 100,188 24,144 24,56"/>
+        <polygon points="100,42 152,72 152,128 100,158 48,128 48,72"/>
+        <circle cx="100" cy="100" r="18"/>
+        <path d="M100 12 L100 188 M24 56 L176 144 M176 56 L24 144"/>
+      </g>
+    </svg>
+    <p class="mark">First-person · blade and left hand</p>
     <h1>Hexwrought</h1>
-    <p class="lede">Combat, spells, and feel. This is not Stillwater.</p>
+    <p class="vow">The sword stays a sword. Magic changes what the next cut does.</p>
+    <nav>
+      <a href="#hand">The Hand</a>
+      <a href="#blade">The Blade</a>
+      <a href="#weave">The Weave</a>
+      <a href="#ledger">Ledger</a>
+    </nav>
   </header>
 
-  <section id="development">
-    <h2>Development</h2>
+  <main>
+    <section id="hand">
+      <p class="chapter">I</p>
+      <h2>The left hand</h2>
+      <p class="preface">Three workings. Held, thrown, or slammed. Each one writes on the steel.</p>
 
-    <article>
-      <div class="row"><h3>Q — crystal channel</h3><span class="ok">in</span></div>
-      <p>Crystal torrent while held. Pack VFX: NS_Crystal_Torrent.</p>
-    </article>
-    <article>
-      <div class="row"><h3>E — magma bolt</h3><span class="wip">tuning</span></div>
-      <p>Fire look kept, scaled down. Pack VFX: NS_Magma_Shot.</p>
-    </article>
-    <article>
-      <div class="row"><h3>F — dark stone</h3><span class="wip">tuning</span></div>
-      <p>Dark stone slam. Not bubbles, Gelmir, or mist. Pack VFX: NS_Dark_Stone.</p>
-    </article>
-    <article>
-      <div class="row"><h3>Blade hits</h3><span class="ok">in</span></div>
-      <p>Blade contact required. No look-assist phantom damage. Butterfly hit VFX off.</p>
-    </article>
-    <article>
-      <div class="row"><h3>Swing audio</h3><span class="ok">in</span></div>
-      <p>Player sharp slash. Enemy dark slash. Footsteps muted. Metallic hit cue only on parry/block.</p>
-    </article>
-    <article>
-      <div class="row"><h3>Spawn casts</h3><span class="ok">fixed</span></div>
-      <p>Stale Q/E/F buffers no longer fire spells when PIE starts.</p>
-    </article>
-  </section>
+      <div class="triad">
+        <article class="sigil frost">
+          <span class="key">Q</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M32 6 L32 58 M12 18 L52 46 M52 18 L12 46"/>
+              <path d="M32 18 L40 32 L32 46 L24 32 Z"/>
+            </g>
+          </svg>
+          <h3>Crystal torrent</h3>
+          <p>A channel, held. Frost climbs the blade. When they freeze, the cut shatters them.</p>
+          <em>in the hand</em>
+        </article>
 
-  <section id="journal">
-    <h2>Journal</h2>
-    <article>
-      <p class="date">7 Oct 2026</p>
-      <p>Hexwrought git is on GitHub, separate from Stillwater. Marketplace packs stay local. Status lives here and in <code>Docs/status/index.html</code> in the repo.</p>
-    </article>
-  </section>
+        <article class="sigil magma">
+          <span class="key">E</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M32 8 C22 24 18 34 32 56 C46 34 42 24 32 8 Z"/>
+              <path d="M32 22 L26 36 H38 Z"/>
+            </g>
+          </svg>
+          <h3>Magma bolt</h3>
+          <p>A thrown ember. When it lands, fire sits on the steel. The next cut keeps eating.</p>
+          <em>finding its weight</em>
+        </article>
+
+        <article class="sigil stone">
+          <span class="key">F</span>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M12 40 L32 10 L52 40 L44 54 H20 Z"/>
+              <path d="M20 40 H44"/>
+            </g>
+          </svg>
+          <h3>Dark stone</h3>
+          <p>Weight, not mist. A slam that should feel like the ground answering.</p>
+          <em>still being wrought</em>
+        </article>
+      </div>
+    </section>
+
+    <section id="blade">
+      <p class="chapter">II</p>
+      <h2>The blade</h2>
+      <p class="preface">Contact, or it did not happen. Poise first. Then the body opens.</p>
+
+      <ol class="laws">
+        <li>
+          <strong>Steel must touch.</strong>
+          No look-assist. No phantom hits. Blood only where the edge lands.
+        </li>
+        <li>
+          <strong>Two voices in the swing.</strong>
+          Ours is a sharp slash. Theirs is a darker cut. Footsteps stay buried.
+        </li>
+        <li>
+          <strong>Poise, then the window.</strong>
+          Health and poise are separate. A break staggers. A parry or a break opens a short riposte.
+        </li>
+        <li>
+          <strong>The bone is the rule.</strong>
+          Head and neck take more. Hands and feet take less. Sever follows the skeleton, not the name of the enemy.
+        </li>
+      </ol>
+    </section>
+
+    <section id="weave">
+      <p class="chapter">III</p>
+      <h2>The weave</h2>
+      <p class="preface">Spells do not replace the sword. They change the cut that follows.</p>
+
+      <div class="rites">
+        <article>
+          <h3>Shatter</h3>
+          <p>Frost, then freeze, then the sword. They come apart.</p>
+        </article>
+        <article>
+          <h3>Cinder</h3>
+          <p>Fire on the blade, then a cut. It keeps burning after the steel leaves.</p>
+        </article>
+        <article>
+          <h3>Arc</h3>
+          <p>Lightning on the blade, then a cut. It jumps once to the next body.</p>
+        </article>
+        <article>
+          <h3>Still unforged</h3>
+          <p>Stone to crack the guard. Force to throw the body. Executions short. Corruption climbing the left hand: veins, cracked skin, runes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="ledger">
+      <p class="chapter">IV</p>
+      <h2>Ledger</h2>
+
+      <article class="entry">
+        <time datetime="2026-10-07">VII Oct MMXXVI</time>
+        <h3>The working is named</h3>
+        <p>Hexwrought stands as a first-person battlemage. Crystal is in the hand. Magma and dark stone are still finding their weight. The blade needs flesh. Casts no longer fire when the yard begins.</p>
+      </article>
+    </section>
+  </main>
 
   <footer>
-    <a href="https://github.com/datguydaz/hexwrought">github.com/datguydaz/hexwrought</a>
+    <p>Wrought in Unreal 5.8</p>
+    <a href="https://github.com/datguydaz/hexwrought">The forge</a>
   </footer>
 </body>
 </html>
