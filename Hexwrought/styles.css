@@ -28,8 +28,9 @@ body {
 .embers,
 .corners {
   pointer-events: none;
-  position: fixed;
+  position: fixed !important;
   inset: 0;
+  z-index: 0;
 }
 
 .world {
