@@ -35,15 +35,15 @@ body {
 .world {
   z-index: 0;
   background:
-    linear-gradient(180deg, rgba(8,9,6,.28) 0%, rgba(6,7,5,.55) 55%, #050604 100%),
-    url("./hexwrought-grounds.jpg") center top / cover no-repeat;
+    linear-gradient(180deg, rgba(8,9,6,.12) 0%, rgba(6,7,5,.35) 70%, rgba(5,6,4,.88) 100%),
+    url("./hexwrought-grounds.jpg") center 20% / cover no-repeat;
   background-attachment: fixed;
-  filter: contrast(1.12) saturate(0.82) brightness(0.78);
+  filter: contrast(1.08) saturate(0.9) brightness(0.95);
 }
 
 .grit {
   z-index: 2;
-  opacity: 0.42;
+  opacity: 0.28;
   mix-blend-mode: overlay;
   background: url("./hexwrought-grit.jpg") center / 520px repeat;
   animation: drift 28s linear infinite;
@@ -51,7 +51,7 @@ body {
 
 .scum {
   z-index: 2;
-  opacity: 0.22;
+  opacity: 0.14;
   mix-blend-mode: multiply;
   background: url("./hexwrought-grit.jpg") 120px 80px / 340px repeat;
 }
@@ -59,15 +59,19 @@ body {
 .vignette {
   z-index: 3;
   background:
-    radial-gradient(ellipse at 50% 30%, transparent 18%, rgba(0,0,0,.55) 72%, rgba(0,0,0,.88) 100%);
+    radial-gradient(ellipse at 50% 28%, transparent 30%, rgba(0,0,0,.4) 78%, rgba(0,0,0,.72) 100%);
+}
+
+.corners {
+  z-index: 6;
 }
 
 .corners img {
   position: absolute;
-  width: min(28vw, 260px);
+  width: min(22vw, 180px);
   mix-blend-mode: screen;
-  opacity: 0.78;
-  filter: sepia(0.35) saturate(1.2);
+  opacity: 0.7;
+  filter: sepia(0.25) saturate(1.15);
 }
 .corners img:nth-child(1) { top: -4%; left: -4%; }
 .corners img:nth-child(2) { top: -4%; right: -4%; transform: scaleX(-1); }
@@ -104,7 +108,7 @@ body {
   to { background-position: 520px 260px; }
 }
 
-header, main, footer, .corners { position: relative; z-index: 5; }
+header, main, footer { position: relative; z-index: 5; }
 
 .hero {
   min-height: 100vh;
@@ -118,10 +122,10 @@ header, main, footer, .corners { position: relative; z-index: 5; }
 }
 
 .seal {
-  width: min(42vw, 280px);
+  width: min(42vw, 260px);
   height: auto;
   margin-bottom: 8px;
-  mix-blend-mode: lighten;
+  border-radius: 8px;
   filter: drop-shadow(0 18px 40px rgba(0,0,0,.9)) saturate(1.15);
 }
 
