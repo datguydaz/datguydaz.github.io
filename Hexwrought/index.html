@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hexwrought — Development Journal</title>
+  <meta name="description" content="Hexwrought development status. Separate from Stillwater.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <nav>
+    <a class="brand" href="#top">Hexwrought</a>
+    <div class="links">
+      <a href="#development">Development</a>
+      <a href="#journal">Journal</a>
+    </div>
+  </nav>
+
+  <header id="top">
+    <p class="kicker">UE 5.8 · first-person battlemage</p>
+    <h1>Hexwrought</h1>
+    <p class="lede">Combat, spells, and feel. This is not Stillwater.</p>
+  </header>
+
+  <section id="development">
+    <h2>Development</h2>
+
+    <article>
+      <div class="row"><h3>Q — crystal channel</h3><span class="ok">in</span></div>
+      <p>Crystal torrent while held. Pack VFX: NS_Crystal_Torrent.</p>
+    </article>
+    <article>
+      <div class="row"><h3>E — magma bolt</h3><span class="wip">tuning</span></div>
+      <p>Fire look kept, scaled down. Pack VFX: NS_Magma_Shot.</p>
+    </article>
+    <article>
+      <div class="row"><h3>F — dark stone</h3><span class="wip">tuning</span></div>
+      <p>Dark stone slam. Not bubbles, Gelmir, or mist. Pack VFX: NS_Dark_Stone.</p>
+    </article>
+    <article>
+      <div class="row"><h3>Blade hits</h3><span class="ok">in</span></div>
+      <p>Blade contact required. No look-assist phantom damage. Butterfly hit VFX off.</p>
+    </article>
+    <article>
+      <div class="row"><h3>Swing audio</h3><span class="ok">in</span></div>
+      <p>Player sharp slash. Enemy dark slash. Footsteps muted. Metallic hit cue only on parry/block.</p>
+    </article>
+    <article>
+      <div class="row"><h3>Spawn casts</h3><span class="ok">fixed</span></div>
+      <p>Stale Q/E/F buffers no longer fire spells when PIE starts.</p>
+    </article>
+  </section>
+
+  <section id="journal">
+    <h2>Journal</h2>
+    <article>
+      <p class="date">7 Oct 2026</p>
+      <p>Hexwrought git is on GitHub, separate from Stillwater. Marketplace packs stay local. Status lives here and in <code>Docs/status/index.html</code> in the repo.</p>
+    </article>
+  </section>
+
+  <footer>
+    <a href="https://github.com/datguydaz/hexwrought">github.com/datguydaz/hexwrought</a>
+  </footer>
+</body>
+</html>
